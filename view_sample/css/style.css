@@ -1,0 +1,80 @@
+/* 最初に全ての空白をリセットして後から個別に設定する */
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background: #666;
+}
+
+header {
+    width: 90%;
+    padding-left: 5%;
+    padding-right: 5%;
+    // 320px を画面の最低幅として設定
+    // width = window.width - padding
+    // 288 = 320 - 16(5%) - 16(5%)
+    min-width: 288px;
+    height: 6.5em;
+    background: #bbb;
+    display: block;
+}
+
+header h1 {
+    margin-left: 16px;
+    padding-top: 1.5em;
+}
+
+#status_list {
+    margin-left: 5%;
+    margin-right: 5%;
+    padding: 16px 16px 64px 6px;
+    // 320px を画面の最低幅として設定
+    // width = window.width - margin - padding
+    // 262 = 320 - 16(5%) - 16(5%) - 16 - 6
+    min-width: 266px;
+    background: #fff;
+}
+
+h2 {
+    margin-top: 32px;
+    margin-left: 10px;
+}
+
+h3 {
+    margin-top: 1.2em;
+}
+
+.room {
+    width: 10em;
+    margin: 20px 10px;
+    float: left;
+}
+
+.capacity {
+    margin: 0.2em 0;
+}
+
+.statuses dl {
+    margin: 0.4em 0;
+}
+
+dt, dd {
+    display: inline-block;
+    width: 45%;
+}
+
+.statuses {
+    margin-top: 1.4em;
+}
+
+/* after 擬似クラスにて clear fix を指定*/
+#status_list:after {
+    clear: both;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}

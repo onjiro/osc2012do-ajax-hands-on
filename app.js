@@ -1,5 +1,5 @@
-express = require('express');
-app = express.createServer();
+var express = require('express');
+var app = express.createServer();
 
 app.use(express.static(__dirname + '/view_sample'));
 
