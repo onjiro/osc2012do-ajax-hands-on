@@ -1,7 +1,8 @@
 var express = require('express');
-var app = express.createServer();
 
+(function(app, port) {
 app.use(express.static(__dirname + '/view_sample'));
 
-app.listen(3000);
-console.log('server start at localhost:3000');
+app.listen(port);
+console.log('server start at localhost:' + port);
+})(express.createServer(), 3000);
