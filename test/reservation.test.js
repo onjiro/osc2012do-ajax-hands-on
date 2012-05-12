@@ -30,6 +30,15 @@ describe('Reservation', function() {
         });
     });
 
+    describe('::find', function() {
+        it('returns Reservations as array if date is assigned');
+        it('returns empty array if not matched when date is assigned');
+        it('returns Reservations as array if date and roomId are assigned');
+        it('returns empty array if not matched when date and roomId are assigned');
+        it('returns a Reservation if date, roomId and division are assigned');
+        it('returns null if not matched when date, roomId and division are assigned');
+    });
+    
     describe('#save', function() {
         it('call collection.save', function() {
             // setup
