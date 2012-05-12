@@ -3,6 +3,7 @@
 <head>
   <title>会議室予約</title>
   <link href="css/style.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
   <script src="js/reserve-room.js" ></script>
 </head>
 <body>
@@ -12,7 +13,7 @@
   <article id="status_list">
     <h2 class="date">XXXX-XX-XX</h2>
     
-    <div id="seminar_room_a" class="room">
+    <div id="seminar_room_a" class="room" onclick="reserve()">
       <h3>セミナールームA</h3>
       <dl class="capacity">
         <dt>定員</dt>
