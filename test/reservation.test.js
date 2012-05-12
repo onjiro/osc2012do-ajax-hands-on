@@ -3,11 +3,19 @@ var sinon = require('sinon');
 var Reservation = require('../lib/reservation.js');
 
 describe('Reservation', function() {
-    var reservation = null;
-    var db = {};
-    var collection = {};
+    var reservation, db, collection;
     beforeEach(function() {
-            reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning');
+        reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning');
+        db = {
+            collection: sinon.spy.create(function(table, fn) {
+                fn(null, collection);
+            })
+        }
+        collection = {
+            save: sinon.spy.create(function(target, option, fn) {
+                fn(null, target);
+            })
+        }
     });
     
     describe('instance', function() {
@@ -25,12 +33,6 @@ describe('Reservation', function() {
     describe('#save', function() {
         it('call collection.save', function() {
             // setup
-            collection.save = sinon.spy.create(function(target, option, callback) {
-                callback(null, target);
-            });
-            db.collection = sinon.spy.create(function(tablename, callback) {
-                callback(null, collection);
-            });
             var callback = sinon.spy.create(function(err, item) {
                 expect(item).to.be(reservation);
             });
