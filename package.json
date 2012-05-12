@@ -1,8 +1,15 @@
 {
     "name": "ajax-plactice-osc2012do",
     "version": "0.0.0",
+    "scripts": {
+        "test": "./node_modules/.bin/mocha --colors --reporter spec test/*.test.js"
+    },
     "dependencies": {
         "express": "2.5.x",
-        "mongodb": ""
+        "mongodb": "0.9.9-8"
+    },
+    "devDependencies": {
+        "mocha": "1.0.3",
+        "expect.js": "0.1.2"
     }
 }
