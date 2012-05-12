@@ -1,11 +1,15 @@
 var expect = require('expect.js');
+var sinon = require('sinon');
 var Reservation = require('../lib/reservation.js');
 
 describe('Reservation', function() {
     var reservation = null;
+    var db = {};
+    var collection = {};
     beforeEach(function() {
             reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning');
     });
+    
     describe('instance', function() {
         it('has date', function() {
             expect(reservation.date).to.be('2012-04-01');
@@ -15,6 +19,29 @@ describe('Reservation', function() {
         });
         it('has division', function() {
             expect(reservation.division).to.be('morning');
+        });
+    });
+
+    describe('#save', function() {
+        it('call collection.save', function() {
+            // setup
+            collection.save = sinon.spy.create(function(target, option, callback) {
+                callback(null, target);
+            });
+            db.collection = sinon.spy.create(function(tablename, callback) {
+                callback(null, collection);
+            });
+            var callback = sinon.spy.create(function(err, item) {
+                expect(item).to.be(reservation);
+            });
+            
+            // execute and assert
+            reservation.save(db, callback);
+            
+            // assert
+            expect(db.collection.called).to.be.ok();
+            expect(collection.save.called).to.be.ok();
+            expect(callback.called).to.be.ok();
         });
     });
 });
