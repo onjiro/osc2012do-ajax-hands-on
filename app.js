@@ -1,5 +1,6 @@
 var express = require('express');
 var mongo_builder = require('./lib/mongo_builder');
+var Reservation = require('./lib/reservation');
 
 var logRequest = function() {}
 var start = function(app, db, port) {
@@ -12,8 +13,9 @@ var start = function(app, db, port) {
         var date = req.query.date;
         var roomId = req.query.roomId;
         var division = req.query.division;
-        var reservations = [];
-        res.send(reservations);
+        Reservation.find(db, date, function(err, reservations) {
+            res.send(reservations);
+        });
     });
     app.post(reservationUrl, function(req, res){
         // TODO res.send(err);
