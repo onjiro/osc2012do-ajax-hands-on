@@ -5,7 +5,7 @@ var Reservation = require('../lib/reservation.js');
 describe('Reservation', function() {
     var reservation, db, collection, selectedReservations;
     beforeEach(function() {
-        reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning');
+        reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning', '佐藤さん');
         db = {
             collection: sinon.spy.create(function(table, fn) {
                 fn(null, collection);
@@ -35,6 +35,9 @@ describe('Reservation', function() {
         });
         it('has division', function() {
             expect(reservation.division).to.be('morning');
+        });
+        it('has reserver', function() {
+            expect(reservation.reserver).to.be('佐藤さん');
         });
     });
 
