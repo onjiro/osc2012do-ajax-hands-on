@@ -22,7 +22,13 @@ var start = function(app, db, port) {
     app.del(reservationUrl, function(req, res){
         // TODO res.send(err)
     });
-
+    
+    // テスト用に起動時に db を削除
+    db.collection('reservations', function(err, collection) {
+        if (err) {throw err;}
+        collection.drop();
+    });
+    
     app.listen(port);
     console.log('server start at localhost:' + port);
 };
