@@ -67,6 +67,9 @@ dt, dd {
 
 .statuses {
     margin-top: 1.4em;
+    /* :hover 時の動作に対応 */
+    border-radius: 8px;
+    -webkit-transition: all 1s ease;
 }
 
 /* after 擬似クラスにて clear fix を指定*/
@@ -77,4 +80,9 @@ dt, dd {
     width: 0;
     height: 0;
     visibility: hidden;
+}
+
+#seminar_room_a:hover .statuses {
+    -webkit-transition: all 0.5s ease;
+    -webkit-box-shadow: 0 0 30px #9ae, 0 0 8px #abe, 0 0 1px #fff;
 }
