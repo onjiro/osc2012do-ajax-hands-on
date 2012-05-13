@@ -13,7 +13,7 @@ $(function() {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + '.' + division + 'dd').text(reserver);
+            $('#' + roomId + ' .' + division + ' dd').text(reserver);
         }
     });
 });
