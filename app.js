@@ -17,7 +17,14 @@ var start = function(app, db, port) {
         });
     });
     app.post(reservationUrl, function(req, res){
-        // TODO res.send(err);
+        console.log(new Date(), reservationUrl, 'post', req.body);
+        var date = req.body.date;
+        var roomId = req.body.roomId;
+        var division = req.body.division;
+        var reserver = req.body.reserver;
+        new Reservation(date, roomId, division, reserver).save(db, function(err, item) {
+            res.send();
+        });
     });
     app.del(reservationUrl, function(req, res){
         // TODO res.send(err)
