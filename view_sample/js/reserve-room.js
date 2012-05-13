@@ -9,7 +9,6 @@ $(function() {
         // 取得できた場合予約状況欄を初期化
         $('.room .statuses dd').text('空き');
         // 予約状況欄に予約者名を記載
-        alert(reservations.length);
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
