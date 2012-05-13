@@ -13,7 +13,20 @@ $(function() {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + '.' + division + 'dd').text(reserver);
+            $('#' + roomId + ' .' + division + ' dd').text(reserver);
         }
     });
 });
+
+function reserve() {
+    // TODO 各部屋への対応
+    var data = {
+        date: '2012-04-01',
+        roomId: 'seminar_room_a',
+        division: 'morning',
+        reserver: 'mohya'
+    }
+    $.post('/reservations', data, function() {
+        $('#' + data.roomId + ' .' + data.division + ' dd').text(data.reserver);
+    });
+}

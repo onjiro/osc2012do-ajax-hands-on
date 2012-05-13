@@ -17,12 +17,25 @@ var start = function(app, db, port) {
         });
     });
     app.post(reservationUrl, function(req, res){
-        // TODO res.send(err);
+        console.log(new Date(), reservationUrl, 'post', req.body);
+        var date = req.body.date;
+        var roomId = req.body.roomId;
+        var division = req.body.division;
+        var reserver = req.body.reserver;
+        new Reservation(date, roomId, division, reserver).save(db, function(err, item) {
+            res.send();
+        });
     });
     app.del(reservationUrl, function(req, res){
         // TODO res.send(err)
     });
-
+    
+    // テスト用に起動時に db を削除
+    db.collection('reservations', function(err, collection) {
+        if (err) {throw err;}
+        collection.drop();
+    });
+    
     app.listen(port);
     console.log('server start at localhost:' + port);
 };
