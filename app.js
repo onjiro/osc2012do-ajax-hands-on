@@ -5,15 +5,22 @@ var start = function(app, db, port) {
     app.use(express.static(__dirname + '/view_sample'));
     app.use(express.bodyParser());
     
-    var reservationUrl = '/reservations/';
-    app.get(reservationUrl + ':date.:roomId?.:division?', function(req, res){
+    var reservationUrl = '/reservations';
+    app.get(reservationUrl, function(req, res){
+        var date = req.query.date;
+        var roomId = req.query.roomId;
+        var division = req.query.division;
+        console.log('get:' + reservationUrl);
+        for (key in req.query) {
+            console.log('  ' + key + ': ' + req.query[key]);
+        }
         var reservations = [];
         res.send(reservations);
     });
-    app.post(reservationUrl + ':date.:roomId.:division', function(req, res){
+    app.post(reservationUrl, function(req, res){
         // TODO res.send(err);
     });
-    app.del(reservationUrl + ':date.:roomId.:division', function(req, res){
+    app.del(reservationUrl, function(req, res){
         // TODO res.send(err)
     });
 
