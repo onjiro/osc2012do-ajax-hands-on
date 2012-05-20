@@ -22,6 +22,10 @@ describe('Reservation', function() {
                         fn(null, selectedReservations);
                     })
                 };
+            }),
+            // notice: pass undefine to callback unless selectedReservations setted with findOne
+            findOne: sinon.spy.create(function(query, fn) {
+                return fn(null, selectedReservations);
             })
         }
     });
@@ -81,6 +85,24 @@ describe('Reservation', function() {
             });
             
             // execute and assert
+            reservation.save(db, callback);
+            
+            // assert
+            expect(db.collection.called).to.be.ok();
+            expect(collection.save.called).to.be.ok();
+            expect(callback.called).to.be.ok();
+        });
+        it('overwrites the record that has same date, roomId and division', function() {
+            // setup
+            selectedReservations = new Reservation('2012-04-01', 'seminar_room_a', 'morning', '斎藤さん');
+            selectedReservations._id = "mongo record id";
+            var callback = sinon.spy.create(function(err, item) {
+                // _id is setted if overwriteing
+                expect(item).to.be(reservation);
+                expect(item._id).to.be.a('string');
+            });
+            
+            // execute
             reservation.save(db, callback);
             
             // assert
