@@ -13,6 +13,7 @@ var start = function(app, db, port) {
         var roomId = req.query.roomId;
         var division = req.query.division;
         Reservation.find(db, date, function(err, reservations) {
+            console.log(new Date(), reservationUrl, 'get', req.query, reservations);
             res.send(reservations);
         });
     });
