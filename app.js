@@ -28,7 +28,13 @@ var start = function(app, db, port) {
         });
     });
     app.del(reservationUrl, function(req, res){
-        // TODO res.send(err)
+        console.log(new Date(), reservationUrl, 'del', req.body);
+        var date = req.body.date;
+        var roomId = req.body.roomId;
+        var division = req.body.division;
+        Reservation.remove(db, date, roomId, division, function(err, item) {
+            res.send();
+        });
     });
     
     // テスト用に起動時に db を削除

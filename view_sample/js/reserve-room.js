@@ -30,3 +30,19 @@ function reserve() {
         $('#' + data.roomId + ' .' + data.division + ' dd').text(data.reserver);
     });
 }
+
+function cancelReservation() {
+    // TODO 各部屋への対応
+    var data = {
+        date: '2012-04-01',
+        roomId: 'seminar_room_a',
+        division: 'morning'
+    }
+    $.ajax('/reservations', {
+        type: 'DELETE',
+        data: data,
+        success: function() {
+            $('#' + data.roomId + ' .' + data.division + ' dd').text('空き');
+        }
+    });
+}
