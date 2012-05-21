@@ -26,6 +26,10 @@ describe('Reservation', function() {
             // notice: pass undefine to callback unless selectedReservations setted with findOne
             findOne: sinon.spy.create(function(query, fn) {
                 return fn(null, selectedReservations);
+            }),
+            // notice: pass undefine to callback unless selectedReservations setted with remove
+            remove: sinon.spy.create(function(query, fn) {
+                return fn(null, selectedReservations);
             })
         }
     });
@@ -75,6 +79,24 @@ describe('Reservation', function() {
         it('returns empty array if not matched when date and roomId are assigned');
         it('returns a Reservation if date, roomId and division are assigned');
         it('returns null if not matched when date, roomId and division are assigned');
+    });
+    
+    describe('::remove', function() {
+        it ('call collection.remove', function() {
+            // setup
+            selectedReservations = [reservation];
+            var callback = sinon.spy.create(function(err, item) {
+                expect(item).to.be(selectedReservations);
+            });
+            
+            // execute
+            Reservation.remove(db, '2012-04-01', 'seminar_room_a', 'morning', callback);
+            
+            // assert
+            expect(db.collection.called).to.be.ok();
+            expect(collection.remove.called).to.be.ok();
+            expect(callback.called).to.be.ok();
+        });
     });
     
     describe('#save', function() {
