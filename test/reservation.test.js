@@ -101,7 +101,12 @@ describe('Reservation', function() {
             });
             
             // execute
-            Reservation.remove(db, '2012-04-01', 'seminar_room_a', 'morning', callback);
+            var query = {
+                date: '2012-04-01',
+                roomId: 'seminar_room_a',
+                division: 'morning',
+            };
+            Reservation.remove(db, query, callback);
             
             // assert
             expect(db.collection.called).to.be.ok();
