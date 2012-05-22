@@ -5,7 +5,12 @@ var Reservation = require('../lib/reservation.js');
 describe('Reservation', function() {
     var reservation, db, collection, selectedReservations;
     beforeEach(function() {
-        reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning', '佐藤さん');
+        reservation = new Reservation({
+            date:     '2012-04-01',
+            roomId:   'seminar_room_a',
+            division: 'morning',
+            reserver: '佐藤さん',
+        });
         db = {
             collection: sinon.spy.create(function(table, fn) {
                 fn(null, collection);
