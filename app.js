@@ -9,10 +9,7 @@ var start = function(app, db, port) {
     var reservationUrl = '/reservations';
     app.get(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'get', req.query);
-        var date = req.query.date;
-        var roomId = req.query.roomId;
-        var division = req.query.division;
-        Reservation.find(db, date, function(err, reservations) {
+        Reservation.find(db, req.query, function(err, reservations) {
             console.log(new Date(), reservationUrl, 'get', req.query, reservations);
             res.send(reservations);
         });
