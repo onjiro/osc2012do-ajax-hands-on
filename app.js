@@ -22,10 +22,7 @@ var start = function(app, db, port) {
     });
     app.del(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'del', req.body);
-        var date = req.body.date;
-        var roomId = req.query.roomId;
-        var division = req.query.division;
-        Reservation.remove(db, date, roomId, division, function(err, item) {
+        Reservation.remove(db, req.body, function(err, item) {
             res.send();
         });
     });
