@@ -19,19 +19,15 @@ var start = function(app, db, port) {
     });
     app.post(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'post', req.body);
-        var date = req.body.date;
-        var roomId = req.body.roomId;
-        var division = req.body.division;
-        var reserver = req.body.reserver;
-        new Reservation(date, roomId, division, reserver).save(db, function(err, item) {
+        new Reservation(req.body).save(db, function(err, item) {
             res.send();
         });
     });
     app.del(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'del', req.body);
         var date = req.body.date;
-        var roomId = req.body.roomId;
-        var division = req.body.division;
+        var roomId = req.query.roomId;
+        var division = req.query.division;
         Reservation.remove(db, date, roomId, division, function(err, item) {
             res.send();
         });
