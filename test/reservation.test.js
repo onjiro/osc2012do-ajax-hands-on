@@ -62,7 +62,10 @@ describe('Reservation', function() {
                 expect(reservations[0]).to.be(reservation);
             });
             
-            Reservation.find(db, '2012-04-01', callback);
+            var query = {
+                date: '2012-04-01'
+            };
+            Reservation.find(db, query, callback);
             
             expect(db.collection.called).to.be.ok();
             expect(collection.find.called).to.be.ok();
@@ -74,7 +77,10 @@ describe('Reservation', function() {
                 expect(reservations).to.have.length(0);
             });
             
-            Reservation.find(db, '2012-04-01', callback);
+            var query = {
+                date: '2012-04-01'
+            };
+            Reservation.find(db, query, callback);
             
             expect(db.collection.called).to.be.ok();
             expect(collection.find.called).to.be.ok();
