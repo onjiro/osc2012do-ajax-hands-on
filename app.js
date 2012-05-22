@@ -9,30 +9,20 @@ var start = function(app, db, port) {
     var reservationUrl = '/reservations';
     app.get(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'get', req.query);
-        var date = req.query.date;
-        var roomId = req.query.roomId;
-        var division = req.query.division;
-        Reservation.find(db, date, function(err, reservations) {
+        Reservation.find(db, req.query, function(err, reservations) {
             console.log(new Date(), reservationUrl, 'get', req.query, reservations);
             res.send(reservations);
         });
     });
     app.post(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'post', req.body);
-        var date = req.body.date;
-        var roomId = req.body.roomId;
-        var division = req.body.division;
-        var reserver = req.body.reserver;
-        new Reservation(date, roomId, division, reserver).save(db, function(err, item) {
+        new Reservation(req.body).save(db, function(err, item) {
             res.send();
         });
     });
     app.del(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'del', req.body);
-        var date = req.body.date;
-        var roomId = req.body.roomId;
-        var division = req.body.division;
-        Reservation.remove(db, date, roomId, division, function(err, item) {
+        Reservation.remove(db, req.body, function(err, item) {
             res.send();
         });
     });

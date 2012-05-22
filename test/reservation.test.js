@@ -5,7 +5,12 @@ var Reservation = require('../lib/reservation.js');
 describe('Reservation', function() {
     var reservation, db, collection, selectedReservations;
     beforeEach(function() {
-        reservation = new Reservation('2012-04-01', 'seminar_room_a', 'morning', '佐藤さん');
+        reservation = new Reservation({
+            date:     '2012-04-01',
+            roomId:   'seminar_room_a',
+            division: 'morning',
+            reserver: '佐藤さん',
+        });
         db = {
             collection: sinon.spy.create(function(table, fn) {
                 fn(null, collection);
@@ -57,7 +62,10 @@ describe('Reservation', function() {
                 expect(reservations[0]).to.be(reservation);
             });
             
-            Reservation.find(db, '2012-04-01', callback);
+            var query = {
+                date: '2012-04-01'
+            };
+            Reservation.find(db, query, callback);
             
             expect(db.collection.called).to.be.ok();
             expect(collection.find.called).to.be.ok();
@@ -69,7 +77,10 @@ describe('Reservation', function() {
                 expect(reservations).to.have.length(0);
             });
             
-            Reservation.find(db, '2012-04-01', callback);
+            var query = {
+                date: '2012-04-01'
+            };
+            Reservation.find(db, query, callback);
             
             expect(db.collection.called).to.be.ok();
             expect(collection.find.called).to.be.ok();
@@ -90,7 +101,12 @@ describe('Reservation', function() {
             });
             
             // execute
-            Reservation.remove(db, '2012-04-01', 'seminar_room_a', 'morning', callback);
+            var query = {
+                date: '2012-04-01',
+                roomId: 'seminar_room_a',
+                division: 'morning',
+            };
+            Reservation.remove(db, query, callback);
             
             // assert
             expect(db.collection.called).to.be.ok();
