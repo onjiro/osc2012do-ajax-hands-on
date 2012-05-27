@@ -1,4 +1,6 @@
 $(function() {
+    // 本日の日付を取得して設定
+    $("h2.date").text(getCurrentDate());
     // 全部屋の予約情報を取得
     // error 系をハンドリングするには $.ajax を使用する必要がある
     var url = '/reservations';
@@ -17,6 +19,10 @@ $(function() {
         }
     });
 });
+
+function getCurrentDate() {
+    return "XXXX-XX-XX"
+}
 
 function reserve() {
     // TODO 各部屋への対応
