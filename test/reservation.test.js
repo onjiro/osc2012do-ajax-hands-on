@@ -120,8 +120,42 @@ describe('Reservation', function() {
             expect(collection.find.called).to.be.ok();
             expect(callback.called).to.be.ok();
         });
-        it('returns a Reservation if date, roomId and division are assigned');
-        it('returns null if not matched when date, roomId and division are assigned');
+        it('returns a Reservation if date, roomId and division are assigned', function() {
+            selectedReservations = [reservation];
+            var callback = sinon.spy.create(function(err, reservations) {
+                expect(reservations).to.have.length(1);
+                expect(reservations[0]).to.be(reservation);
+            });
+            
+            var query = {
+                date: '2012-04-01',
+                roomId: 'seminar_room_a',
+                division: 'morning'
+            };
+            Reservation.find(db, query, callback);
+            
+            expect(db.collection.called).to.be.ok();
+            expect(collection.find.called).to.be.ok();
+            expect(callback.called).to.be.ok();
+        });
+        it('returns null if not matched when date, roomId and division are assigned', function() {
+            selectedReservations = null;
+            var callback = sinon.spy.create(function(err, reservations) {
+                expect(reservations).to.be.an(Array);
+                expect(reservations).to.have.length(0);
+            });
+            
+            var query = {
+                date: '2012-04-01',
+                roomId: 'seminar_room_a',
+                division: 'morning'
+            };
+            Reservation.find(db, query, callback);
+            
+            expect(db.collection.called).to.be.ok();
+            expect(collection.find.called).to.be.ok();
+            expect(callback.called).to.be.ok();
+        });
     });
     
     describe('::remove', function() {
