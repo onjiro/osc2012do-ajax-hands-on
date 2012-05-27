@@ -1,39 +1,57 @@
 $(function() {
     // 本日の日付を取得して設定
-    $("h2.date").text(getCurrentDate());
+    $("h2.date").text(formatDate(new Date()));
+    
+    // 予約ボタンの設置
+    $('.room .statuses dl')
+        .append('<dd class="reserve-button">予約</dd>')
+        .children('.reserve-button')
+        .bind('click', function(event) {
+            $this = $(this);
+            var data = {
+                date: formatDate(new Date()),
+                roomId: $this.parent().parent().parent().attr('id'),
+                division: $this.parent().data('division'),
+                reserver: 'mohya'
+            }
+            reserve(data.date, data.roomId, data.division, data.reserver);
+        });
+    
     // 全部屋の予約情報を取得
     // error 系をハンドリングするには $.ajax を使用する必要がある
     var url = '/reservations';
     var data = {
-        date: '2012-04-01'
+        date: formatDate(new Date())
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
-        $('.room .statuses dd').text('空き');
+        $('.room .statuses dd.reserver').text('空き');
         // 予約状況欄に予約者名を記載
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + ' .' + division + ' dd').text(reserver);
+            $('#' + roomId + ' [data-division=' + division + '] dd.reserver')
+                .text(reserver);
         }
     });
 });
 
-function getCurrentDate() {
-    return "XXXX-XX-XX"
+function formatDate(date) {
+    // Date#getMonth は 0 始まりのため 1 を加算する必要がある
+    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 }
 
-function reserve() {
+function reserve(date, roomId, division, reserver) {
     // TODO 各部屋への対応
     var data = {
-        date: '2012-04-01',
-        roomId: 'seminar_room_a',
-        division: 'morning',
-        reserver: 'mohya'
+        date: date,
+        roomId: roomId,
+        division: division,
+        reserver: reserver
     }
     $.post('/reservations', data, function() {
-        $('#' + data.roomId + ' .' + data.division + ' dd').text(data.reserver);
+        $('#' + data.roomId + ' [data-division=' + data.division + '] dd.reserver').text(data.reserver);
     });
 }
 
