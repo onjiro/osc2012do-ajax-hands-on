@@ -8,11 +8,18 @@ $(function() {
         .children('.reserve-button')
         .bind('click', function(event) {
             $this = $(this);
+            // prompt で入力ダイアログを開く
+            // キャンセルの場合 null、未入力の場合空白
+            // TODO 空白のトリミング
+            var reserver = prompt('予約者を入力してください。');
+            if (!reserver || reserver === '') {
+                return;
+            }
             var data = {
                 date: formatDate(new Date()),
                 roomId: $this.parent().parent().parent().attr('id'),
                 division: $this.parent().data('division'),
-                reserver: 'mohya'
+                reserver: reserver
             }
             reserve(data.date, data.roomId, data.division, data.reserver);
         });
