@@ -31,13 +31,15 @@ $(function() {
     });
     
     // 前後の日付への移動ボタンを設置
+    var changeDate = function(shifting) {
+        currentDate.setTime(currentDate.getTime() + shifting);
+        refresh(currentDate);
+    };
     $('.button-backward').bind('click', function(event) {
-        currentDate.setTime(currentDate.getTime() - A_DAY_IN_MILLISECONDS);
-        refresh(currentDate);
-    })
+        changeDate(-A_DAY_IN_MILLISECONDS);
+    });
     $('.button-forward').bind('click', function(event) {
-        currentDate.setTime(currentDate.getTime() + A_DAY_IN_MILLISECONDS);
-        refresh(currentDate);
+        changeDate(+A_DAY_IN_MILLISECONDS);
     });
     
     // 全部屋の予約情報を取得
