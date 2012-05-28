@@ -27,7 +27,6 @@ $(function() {
     
     // 更新ボタンの設置
     $('.button-reload').bind('click', function(event) {
-        $this = $(this);
         refresh(currentDate);
     });
     
