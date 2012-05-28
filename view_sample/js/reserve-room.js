@@ -1,7 +1,8 @@
 A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
-var currentDate = new Date();
 
 $(function() {
+    var currentDate = new Date();
+    
     // 予約ボタンの設置
     $('.room .statuses dl')
         .append('<dd class="reserve-button">予約</dd>')
