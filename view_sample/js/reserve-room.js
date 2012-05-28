@@ -65,14 +65,12 @@ function refresh(date) {
     });
 }
 
-
 function formatDate(date) {
     // Date#getMonth は 0 始まりのため 1 を加算する必要がある
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 }
 
 function reserve(date, roomId, division, reserver) {
-    // TODO 各部屋への対応
     var data = {
         date: date,
         roomId: roomId,
