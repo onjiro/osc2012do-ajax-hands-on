@@ -1,7 +1,4 @@
 $(function() {
-    // 本日の日付を取得して設定
-    $("h2.date").text(formatDate(new Date()));
-    
     // 予約ボタンの設置
     $('.room .statuses dl')
         .append('<dd class="reserve-button">予約</dd>')
@@ -24,11 +21,20 @@ $(function() {
             reserve(data.date, data.roomId, data.division, data.reserver);
         });
     
+    // 更新ボタンの設置
+    $('.button-reload').bind('click', function(event) {
+        $this = $(this);
+        refresh(new Date());
+    });
+    
     // 全部屋の予約情報を取得
     refresh(new Date());
 });
 
 function refresh(date) {
+    // 本日の日付を取得して設定
+    $("h2.date").text(formatDate(date));
+    
     // error 系をハンドリングするには $.ajax を使用する必要がある
     var url = '/reservations';
     var data = {
