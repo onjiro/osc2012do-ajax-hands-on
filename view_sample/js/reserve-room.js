@@ -1,3 +1,5 @@
+var currentDate = new Date();
+
 $(function() {
     // 予約ボタンの設置
     $('.room .statuses dl')
@@ -13,7 +15,7 @@ $(function() {
                 return;
             }
             var data = {
-                date: formatDate(new Date()),
+                date: formatDate(currentDate),
                 roomId: $this.parent().parent().parent().attr('id'),
                 division: $this.parent().data('division'),
                 reserver: reserver
@@ -24,11 +26,21 @@ $(function() {
     // 更新ボタンの設置
     $('.button-reload').bind('click', function(event) {
         $this = $(this);
-        refresh(new Date());
+        refresh(currentDate);
+    });
+    
+    // 前後の日付への移動ボタンを設置
+    $('.button-backward').bind('click', function(event) {
+        currentDate.setTime(currentDate.getTime() - 24 * 60 * 60 * 1000);
+        refresh(currentDate);
+    })
+    $('.button-forward').bind('click', function(event) {
+        currentDate.setTime(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        refresh(currentDate);
     });
     
     // 全部屋の予約情報を取得
-    refresh(new Date());
+    refresh(currentDate);
 });
 
 function refresh(date) {
