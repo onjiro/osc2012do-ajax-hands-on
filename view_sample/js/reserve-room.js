@@ -25,10 +25,14 @@ $(function() {
         });
     
     // 全部屋の予約情報を取得
+    refresh(new Date());
+});
+
+function refresh(date) {
     // error 系をハンドリングするには $.ajax を使用する必要がある
     var url = '/reservations';
     var data = {
-        date: formatDate(new Date())
+        date: formatDate(date)
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
@@ -42,7 +46,8 @@ $(function() {
                 .text(reserver);
         }
     });
-});
+}
+
 
 function formatDate(date) {
     // Date#getMonth は 0 始まりのため 1 を加算する必要がある
