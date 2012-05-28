@@ -1,3 +1,4 @@
+A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 var currentDate = new Date();
 
 $(function() {
@@ -31,11 +32,11 @@ $(function() {
     
     // 前後の日付への移動ボタンを設置
     $('.button-backward').bind('click', function(event) {
-        currentDate.setTime(currentDate.getTime() - 24 * 60 * 60 * 1000);
+        currentDate.setTime(currentDate.getTime() - A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
     })
     $('.button-forward').bind('click', function(event) {
-        currentDate.setTime(currentDate.getTime() + 24 * 60 * 60 * 1000);
+        currentDate.setTime(currentDate.getTime() + A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
     });
     
