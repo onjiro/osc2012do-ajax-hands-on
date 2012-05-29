@@ -26,12 +26,12 @@ $(function() {
         });
     
     // 更新ボタンの設置
-    $('.button-reload').bind('click', function(event) {
+    $('.button.reload').bind('click', function(event) {
         refresh(currentDate);
     });
     
     // 前後の日付への移動ボタンを設置
-    $('.button-date-shift').bind('click', function(shifting) {
+    $('.button.date-shift').bind('click', function(shifting) {
         var shiftDate = parseInt($(this).data('shifting'));
         currentDate.setTime(currentDate.getTime() + shiftDate * A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
