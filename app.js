@@ -38,5 +38,5 @@ var start = function(app, db, port) {
 };
 
 mongo_builder.ready('room-reservations', function(db){
-    start(express.createServer(), db, 3000);
+    start(express.createServer(), db, process.env.PORT || 3000);
 });
