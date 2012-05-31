@@ -31,6 +31,7 @@ header h1 {
 }
 
 #status_list {
+    position: relative;
     margin-left: 5%;
     margin-right: 5%;
     padding: 16px 16px 64px 6px;
@@ -41,10 +42,11 @@ header h1 {
     background: #fff;
     background-image: -webkit-linear-gradient(top, white 80%, #ddd);
     box-shadow: inset 1px 1px 4px #eee, 2px 2px 8px #333;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 h2 {
-    margin-top: 32px;
 }
 
 h3 {
@@ -93,7 +95,39 @@ dt, dd {
 }
 
 #date-field {
-    margin-left: 10px;
+    position: absolute;
+    top: -3em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    right: 20px;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    width: 20em;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 8px 8px 32px #666;
+    z-index: 2;
+}
+
+#date-field .left {
+    float: left;
+}
+#date-field .date {
+    display: inline;
+}
+#date-field .right {
+    float: right;
+}
+
+/* after 擬似クラスにて clear fix を指定*/
+#date-field:after {
+    clear: both;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    visibility: hidden;
 }
 
 .button {
