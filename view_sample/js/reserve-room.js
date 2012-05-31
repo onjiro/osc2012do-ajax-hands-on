@@ -4,9 +4,7 @@ $(function() {
     var currentDate = new Date();
     
     // 予約ボタンの設置
-    $('.room .statuses dl')
-        .append('<dd class="reserve-button">予約</dd>')
-        .children('.reserve-button')
+    $('.statuses .reserve')
         .bind('click', function(event) {
             $this = $(this);
             // prompt で入力ダイアログを開く
@@ -18,7 +16,7 @@ $(function() {
             }
             var data = {
                 date: formatDate(currentDate),
-                roomId: $this.parent().parent().parent().attr('id'),
+                roomId: $this.parent().parent().attr('id'),
                 division: $this.parent().data('division'),
                 reserver: reserver
             }
@@ -58,8 +56,7 @@ function refresh(date) {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + ' [data-division=' + division + '] dd.reserver')
-                .text(reserver);
+            $('#' + roomId + ' [data-division=' + division + '] .status').text(reserver);
         }
     });
 }
@@ -77,7 +74,7 @@ function reserve(date, roomId, division, reserver) {
         reserver: reserver
     }
     $.post('/reservations', data, function() {
-        $('#' + data.roomId + ' [data-division=' + data.division + '] dd.reserver').text(data.reserver);
+        $('#' + data.roomId + ' [data-division=' + data.division + '] .status').text(data.reserver);
     });
 }
 

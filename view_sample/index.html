@@ -18,116 +18,95 @@
       <div class="button date-shift" data-shifting="+1">&gt;&gt;</div>
     </div>
     
-    <div id="seminar_room_a" class="room" ondblclick="cancelReservation()">
-      <h3>セミナールームA</h3>
-      <dl class="capacity">
-        <dt>定員</dt>
-        <dd>150人</dd>
-      </dl>
-      <div class="statuses">
-        <dl data-division="morning">
-          <dt>午前</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="daytime">
-          <dt>午後</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="night">
-          <dt>夜間</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-      </div>
-    </div>
-
-    <div id="seminar_room_b" class="room">
-      <h3>セミナールームB</h3>
-      <dl class="capacity">
-        <dt>定員</dt>
-        <dd>40人</dd>
-      </dl>
-      <div class="statuses">
-        <dl data-division="morning">
-          <dt>午前</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="daytime">
-          <dt>午後</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="night">
-          <dt>夜間</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-      </div>
-    </div>
-
-    <div id="seminar_room_c" class="room">
-      <h3>セミナールームC</h3>
-      <dl class="capacity">
-        <dt>定員</dt>
-        <dd>20人</dd>
-      </dl>
-      <div class="statuses">
-        <dl data-division="morning">
-          <dt>午前</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="daytime">
-          <dt>午後</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="night">
-          <dt>夜間</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-      </div>
-    </div>
-
-    <div id="practical_room" class="room">
-      <h3>実習室</h3>
-      <dl class="capacity">
-        <dt>定員</dt>
-        <dd>-</dd>
-      </dl>
-      <div class="statuses">
-        <dl data-division="morning">
-          <dt>午前</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="daytime">
-          <dt>午後</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="night">
-          <dt>夜間</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-      </div>
-    </div>
-
-    <div id="conference_room" class="room">
-      <h3>会議室</h3>
-      <dl class="capacity">
-        <dt>定員</dt>
-        <dd>14人</dd>
-      </dl>
-      <div class="statuses">
-        <dl data-division="morning">
-          <dt>午前</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="daytime">
-          <dt>午後</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-        <dl data-division="night">
-          <dt>夜間</dt>
-          <dd class='reserver'>不明</dd>
-        </dl>
-      </div>
-    </div>
-
+    <table class="statuses">
+      <tr>
+        <th>部屋</th>
+        <th class="capacity">定員</th>
+        <th class="morning">午前</th>
+        <th class="daytime">午後</th>
+        <th class="night">夜間</th>
+      </tr>
+      <tr id="seminar_room_a">
+        <td>セミナールームA</td>
+        <td class="capacity">150人</td>
+        <td data-division="morning">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="daytime">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="night">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+      </tr>
+      <tr id="seminar_room_b">
+        <td>セミナールームB</td>
+        <td class="capacity">40人</td>
+        <td data-division="morning">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="daytime">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="night">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+      </tr>
+      <tr id="seminar_room_c">
+        <td>セミナールームC</td>
+        <td class="capacity">30人</td>
+        <td data-division="morning">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="daytime">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="night">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+      </tr>
+      <tr id="practical_room">
+        <td>実習室</td>
+        <td class="capacity">-</td>
+        <td data-division="morning">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="daytime">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="night">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+      </tr>
+      <tr id="conference_room">
+        <td>会議室</td>
+        <td class="capacity">14人</td>
+        <td data-division="morning">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="daytime">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+        <td data-division="night">
+          <span class="status">不明</span>
+          <span class="reserve">予約</span>
+        </td>
+      </tr>
+    </table>
   </article>
 </body>
 </html>
