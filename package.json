@@ -4,6 +4,9 @@
     "scripts": {
         "test": "./node_modules/.bin/mocha --colors --reporter spec test/*.test.js"
     },
+    "engines": {
+        "node": "~0.6.12"
+    },
     "dependencies": {
         "express": "2.5.x",
         "mongodb": "0.9.9-8"
