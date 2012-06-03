@@ -56,6 +56,7 @@ dt, dd {
     margin-top: 1.4em;
     border: 1px solid #666;
     border-radius: 3px;
+    width: 50.5em;
 }
 
 .statuses th {
@@ -68,6 +69,21 @@ dt, dd {
     height: 2.5em;
     border: 1px solid #666;
     border-radius: 3px;
+    position: relative;
+    padding-left: 2px;
+}
+
+.statuses .status {
+    display: block;
+    width: 5em;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.statuses .button {
+    position: absolute;
+    right: 2px;
+    top: 0.2em;
 }
 
 #status_list>.button {
