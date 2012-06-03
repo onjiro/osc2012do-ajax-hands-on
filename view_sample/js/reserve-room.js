@@ -4,7 +4,7 @@ $(function() {
     var currentDate = new Date();
     
     // 予約ボタンの設置
-    $('.statuses .reserve')
+    $('.reservations .reserve')
         .bind('click', function(event) {
             $this = $(this);
             // prompt で入力ダイアログを開く
@@ -29,7 +29,7 @@ $(function() {
     });
     
     // 前後の日付への移動ボタンを設置
-    $('.button.date_shift').bind('click', function(shifting) {
+    $('.button.date-shift').bind('click', function(shifting) {
         var shiftDate = parseInt($(this).data('shifting'));
         currentDate.setTime(currentDate.getTime() + shiftDate * A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
@@ -50,7 +50,7 @@ function refresh(date) {
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
-        $('.statuses .status').text('空き');
+        $('.reservations .status').text('空き');
         // 予約状況欄に予約者名を記載
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
@@ -82,7 +82,7 @@ function cancelReservation() {
     // TODO 各部屋への対応
     var data = {
         date: '2012-04-01',
-        roomId: 'seminar_room_a',
+        roomId: 'seminar-room-a',
         division: 'morning'
     }
     $.ajax('/reservations', {

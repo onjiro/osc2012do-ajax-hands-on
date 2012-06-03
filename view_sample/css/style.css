@@ -8,7 +8,7 @@ body {
     background: #666;
 }
 
-header {
+header, .header {
     width: 90%;
     padding-left: 5%;
     padding-right: 5%;
@@ -30,7 +30,7 @@ header h1 {
     padding-top: 1.5em;
 }
 
-#status_list {
+#statuses {
     position: relative;
     margin-left: 5%;
     margin-right: 5%;
@@ -51,7 +51,7 @@ dt, dd {
     width: 45%;
 }
 
-#status_list>.statuses {
+#statuses>.reservations {
     margin-left: 4em;
     margin-top: 1.4em;
     border: 1px solid #666;
@@ -59,12 +59,12 @@ dt, dd {
     width: 50.5em;
 }
 
-.statuses th {
+.reservations th {
     background-color: #aaf;
     background-image: -webkit-linear-gradient(top, #AAF, white);
 }
 
-.statuses th, .statuses td {
+.reservations th, .reservations td {
     width: 10em;
     height: 2.5em;
     border: 1px solid #666;
@@ -73,27 +73,27 @@ dt, dd {
     padding-left: 2px;
 }
 
-.statuses .status {
+.reservations .status {
     display: block;
     width: 5em;
     overflow: hidden;
     white-space: nowrap;
 }
 
-.statuses .button {
+.reservations .button {
     position: absolute;
     right: 4px;
     top: 0.2em;
 }
 
-#status_list>.button {
+#statuses>.button {
     margin-left: 4em;
     margin-top: 0.8em;
     width: 10em;
 }
 
 /* after 擬似クラスにて clear fix を指定*/
-#status_list:after {
+#statuses:after {
     clear: both;
     display: block;
     content: "";
@@ -102,7 +102,7 @@ dt, dd {
     visibility: hidden;
 }
 
-#seminar_room_a:hover .statuses {
+#seminar_room_a:hover .reservations {
     -webkit-transition: all 0.5s ease;
     -webkit-box-shadow: 0 0 30px #9ae, 0 0 8px #abe, 0 0 1px #fff;
 }
