@@ -74,9 +74,6 @@ dt, dd {
 
 .statuses {
     margin-top: 1.4em;
-    /* :hover 時の動作に対応 */
-    border-radius: 8px;
-    -webkit-transition: all 1s ease;
 }
 
 /* after 擬似クラスにて clear fix を指定*/
