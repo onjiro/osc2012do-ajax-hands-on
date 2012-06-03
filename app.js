@@ -11,18 +11,21 @@ var start = function(app, db, port) {
         console.log(new Date(), reservationUrl, 'get', req.query);
         Reservation.find(db, req.query, function(err, reservations) {
             console.log(new Date(), reservationUrl, 'get', req.query, reservations);
+            res.header('Access-Control-Allow-Origin', '*');
             res.send(reservations);
         });
     });
     app.post(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'post', req.body);
         new Reservation(req.body).save(db, function(err, item) {
+            res.header('Access-Control-Allow-Origin', '*');
             res.send();
         });
     });
     app.del(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'del', req.body);
         Reservation.remove(db, req.body, function(err, item) {
+            res.header('Access-Control-Allow-Origin', '*');
             res.send();
         });
     });
