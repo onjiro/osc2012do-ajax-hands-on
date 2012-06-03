@@ -4,6 +4,8 @@
 
 AJAX ハンズオンの演習課題用サーバー環境とサンプル画面です。
 
+http://osc2012do-ajax-hands-on.herokuapp.com/
+
 ## API
 
 TODO
