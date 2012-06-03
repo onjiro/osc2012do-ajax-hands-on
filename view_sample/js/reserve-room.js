@@ -4,9 +4,7 @@ $(function() {
     var currentDate = new Date();
     
     // 予約ボタンの設置
-    $('.room .statuses dl')
-        .append('<dd class="reserve-button">予約</dd>')
-        .children('.reserve-button')
+    $('.statuses .reserve')
         .bind('click', function(event) {
             $this = $(this);
             // prompt で入力ダイアログを開く
@@ -18,7 +16,7 @@ $(function() {
             }
             var data = {
                 date: formatDate(currentDate),
-                roomId: $this.parent().parent().parent().attr('id'),
+                roomId: $this.parent().parent().attr('id'),
                 division: $this.parent().data('division'),
                 reserver: reserver
             }
@@ -26,12 +24,12 @@ $(function() {
         });
     
     // 更新ボタンの設置
-    $('.button-reload').bind('click', function(event) {
+    $('.button.reload').bind('click', function(event) {
         refresh(currentDate);
     });
     
     // 前後の日付への移動ボタンを設置
-    $('.button-date-shift').bind('click', function(shifting) {
+    $('.button.date_shift').bind('click', function(shifting) {
         var shiftDate = parseInt($(this).data('shifting'));
         currentDate.setTime(currentDate.getTime() + shiftDate * A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
@@ -52,14 +50,13 @@ function refresh(date) {
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
-        $('.room .statuses dd.reserver').text('空き');
+        $('.statuses .status').text('空き');
         // 予約状況欄に予約者名を記載
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + ' [data-division=' + division + '] dd.reserver')
-                .text(reserver);
+            $('#' + roomId + ' [data-division=' + division + '] .status').text(reserver);
         }
     });
 }
@@ -77,7 +74,7 @@ function reserve(date, roomId, division, reserver) {
         reserver: reserver
     }
     $.post('/reservations', data, function() {
-        $('#' + data.roomId + ' [data-division=' + data.division + '] dd.reserver').text(data.reserver);
+        $('#' + data.roomId + ' [data-division=' + data.division + '] .status').text(data.reserver);
     });
 }
 

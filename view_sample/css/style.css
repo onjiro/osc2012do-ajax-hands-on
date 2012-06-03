@@ -17,8 +17,12 @@ header {
     // 288 = 320 - 16(5%) - 16(5%)
     min-width: 288px;
     height: 6.5em;
-    background: #bbb;
+    background: #e6e6e6;
+    background-image: -webkit-linear-gradient(top, white, #ebebeb);
+    box-shadow: inset 0 0 1px #666, 0 4px 8px #666;
     display: block;
+    position: relative;
+    z-index: 1;
 }
 
 header h1 {
@@ -27,6 +31,7 @@ header h1 {
 }
 
 #status_list {
+    position: relative;
     margin-left: 5%;
     margin-right: 5%;
     padding: 16px 16px 64px 6px;
@@ -35,29 +40,10 @@ header h1 {
     // 262 = 320 - 16(5%) - 16(5%) - 16 - 6
     min-width: 266px;
     background: #fff;
-}
-
-h2 {
-    margin-top: 32px;
-    margin-left: 10px;
-}
-
-h3 {
-    margin-top: 1.2em;
-}
-
-.room {
-    width: 10em;
-    margin: 20px 10px;
-    float: left;
-}
-
-.capacity {
-    margin: 0.2em 0;
-}
-
-.statuses dl {
-    margin: 0.4em 0;
+    background-image: -webkit-linear-gradient(top, white 80%, #ddd);
+    box-shadow: inset 1px 1px 4px #eee, 2px 2px 8px #333;
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
 }
 
 dt, dd {
@@ -65,11 +51,45 @@ dt, dd {
     width: 45%;
 }
 
-.statuses {
+#status_list>.statuses {
+    margin-left: 4em;
     margin-top: 1.4em;
-    /* :hover 時の動作に対応 */
-    border-radius: 8px;
-    -webkit-transition: all 1s ease;
+    border: 1px solid #666;
+    border-radius: 3px;
+    width: 50.5em;
+}
+
+.statuses th {
+    background-color: #aaf;
+    background-image: -webkit-linear-gradient(top, #AAF, white);
+}
+
+.statuses th, .statuses td {
+    width: 10em;
+    height: 2.5em;
+    border: 1px solid #666;
+    border-radius: 3px;
+    position: relative;
+    padding-left: 2px;
+}
+
+.statuses .status {
+    display: block;
+    width: 5em;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+.statuses .button {
+    position: absolute;
+    right: 4px;
+    top: 0.2em;
+}
+
+#status_list>.button {
+    margin-left: 4em;
+    margin-top: 0.8em;
+    width: 10em;
 }
 
 /* after 擬似クラスにて clear fix を指定*/
@@ -85,4 +105,62 @@ dt, dd {
 #seminar_room_a:hover .statuses {
     -webkit-transition: all 0.5s ease;
     -webkit-box-shadow: 0 0 30px #9ae, 0 0 8px #abe, 0 0 1px #fff;
+}
+
+#date-field {
+    position: absolute;
+    top: -3em;
+    padding-top: 0.8em;
+    padding-bottom: 0.8em;
+    right: 20px;
+    padding-left: 1.2em;
+    padding-right: 1.2em;
+    width: 20em;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 8px 8px 32px #666;
+    z-index: 2;
+}
+
+#date-field .left {
+    float: left;
+}
+#date-field .date {
+    display: inline;
+}
+#date-field .right {
+    float: right;
+}
+
+/* after 擬似クラスにて clear fix を指定*/
+#date-field:after {
+    clear: both;
+    display: block;
+    content: "";
+    width: 0;
+    height: 0;
+    visibility: hidden;
+}
+
+.button {
+    display: inline-block;
+    width: 64px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #666;
+    text-align: center;
+    text-shadow: -1px -1px 1px #999, 1px 1px 1px #fff;
+    background-color: #E6E6E6;
+    box-shadow: inset 0 0 1px #666, 1px 1px 4px #999;
+    border-radius: 4px;
+}
+
+.button:hover {
+    background-color: #ddd;
+}
+
+.button:active {
+    background-color: #ccc;
+    box-shadow: inset 1px 1px 4px #666, 1px 1px 2px #999;
 }
