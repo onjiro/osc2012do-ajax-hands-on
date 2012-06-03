@@ -29,7 +29,7 @@ $(function() {
     });
     
     // 前後の日付への移動ボタンを設置
-    $('.button.date-shift').bind('click', function(shifting) {
+    $('.button.date_shift').bind('click', function(shifting) {
         var shiftDate = parseInt($(this).data('shifting'));
         currentDate.setTime(currentDate.getTime() + shiftDate * A_DAY_IN_MILLISECONDS);
         refresh(currentDate);
@@ -50,7 +50,7 @@ function refresh(date) {
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
-        $('.room .statuses dd.reserver').text('空き');
+        $('.statuses .status').text('空き');
         // 予約状況欄に予約者名を記載
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
