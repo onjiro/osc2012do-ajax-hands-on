@@ -72,8 +72,29 @@ dt, dd {
     width: 45%;
 }
 
-.statuses {
+#status_list>.statuses {
+    margin-left: 4em;
     margin-top: 1.4em;
+    border: 1px solid #666;
+    border-radius: 3px;
+}
+
+.statuses th {
+    background-color: #aaf;
+    background-image: -webkit-linear-gradient(top, #AAF, white);
+}
+
+.statuses th, .statuses td {
+    width: 10em;
+    height: 2.5em;
+    border: 1px solid #666;
+    border-radius: 3px;
+}
+
+#status_list>.button {
+    margin-left: 4em;
+    margin-top: 0.8em;
+    width: 10em;
 }
 
 /* after 擬似クラスにて clear fix を指定*/
