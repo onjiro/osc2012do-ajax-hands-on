@@ -46,27 +46,6 @@ header h1 {
     border-bottom-right-radius: 8px;
 }
 
-h2 {
-}
-
-h3 {
-    margin-top: 1.2em;
-}
-
-.room {
-    width: 10em;
-    margin: 20px 10px;
-    float: left;
-}
-
-.capacity {
-    margin: 0.2em 0;
-}
-
-.statuses dl {
-    margin: 0.4em 0;
-}
-
 dt, dd {
     display: inline-block;
     width: 45%;
