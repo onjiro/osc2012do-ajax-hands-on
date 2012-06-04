@@ -144,8 +144,8 @@ $(function() {
         // 予約がない場合は reservations にデータが入っていないため、事前に全ての予約状況を"空き"に変更する
         $(".status").text("空き");
         // reservations の情報を使用して予約状況テーブルを更新する
-        $.each(reservations, function(reservation) {
-            $("#" + reservation.roomId + "[data-division=" + reservations.division + "] .status").text(reservation.reserver);
+        $.each(reservations, function(i, reservation) {
+            $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
         });
     });
 });
