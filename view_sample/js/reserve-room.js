@@ -4,8 +4,8 @@ $(function() {
     var currentDate = new Date();
     
     // 予約ボタンの設置
-    $('.reservations .reserve')
-        .bind('click', function(event) {
+    $('.reservations .reserve:not(.disabled)')
+        .live('click', function(event) {
             $this = $(this);
             // prompt で入力ダイアログを開く
             // キャンセルの場合 null、未入力の場合空白
