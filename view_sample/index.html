@@ -3,112 +3,149 @@
 <head>
   <meta charset="UTF-8">
   <title>会議室予約</title>
-  <link href="css/style.css" rel="stylesheet" />
+  <link href="css/bootstrap.css" rel="stylesheet" />
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" ></script>
+  <script src="js/bootstrap.min.js" ></script>
   <script src="js/reserve-room.js" ></script>
+  <style type="text/css">
+    td.capacity { text-align: right }
+  </style>
 </head>
 <body>
-  <header>
-    <h1>会議室予約状況</h1>
-  </header>
-  <article id="statuses">
-    <div id="date-field">
-      <div class="button date-shift left" data-shifting="-1">&lt;&lt;</div>
-      <div class="button date-shift right" data-shifting="+1">&gt;&gt;</div>
-      <h2 class="date">yyyy-MM-dd</h2>
+  <div class="navbar">
+    <div class="navbar-inner">
+      <div class="container">
+        <a href="/" class="brand">Ajax hands on - OSC 2012 do</a>
+      </div>
     </div>
-    
-    <table class="reservations">
-      <tr>
-        <th>部屋</th>
-        <th class="capacity">定員</th>
-        <th class="morning">午前</th>
-        <th class="daytime">午後</th>
-        <th class="night">夜間</th>
-      </tr>
-      <tr id="seminar-room-a">
-        <td>セミナールームA</td>
-        <td class="capacity">150人</td>
-        <td data-division="morning">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="daytime">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="night">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-      </tr>
-      <tr id="seminar-room-b">
-        <td>セミナールームB</td>
-        <td class="capacity">40人</td>
-        <td data-division="morning">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="daytime">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="night">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-      </tr>
-      <tr id="seminar-room-c">
-        <td>セミナールームC</td>
-        <td class="capacity">30人</td>
-        <td data-division="morning">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="daytime">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="night">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-      </tr>
-      <tr id="practical-room">
-        <td>実習室</td>
-        <td class="capacity">-</td>
-        <td data-division="morning">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="daytime">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="night">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-      </tr>
-      <tr id="conference-room">
-        <td>会議室</td>
-        <td class="capacity">14人</td>
-        <td data-division="morning">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="daytime">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-        <td data-division="night">
-          <span class="status">不明</span>
-          <span class="reserve button">予約</span>
-        </td>
-      </tr>
-    </table>
-    
-    <div class="button reload">更新</div>
+  </div>
+  
+  <article id="statuses" class="container-fluid">
+    <div class="row-flued">
+      <nav class="span3 well">
+        <ul class="nav nav-pills nav-stacked">
+          <li class="active"><a href="/">Home</a></li>
+          <li ><a href="/plactice0.html">演習0.<br/>HTML でページを作成</a></li>
+          <li ><a href="/plactice1.html">演習1.<br/>今日の日付を表示する</a></li>
+          <li ><a href="/plactice2.html">演習2.<br/>会議室の利用状況を反映</a></li>
+          <li ><a href="/plactice3.html">演習3.<br/>空いている会議室の予約</a></li>
+          <li ><a href="/plactice4.html">演習4.<br/>更新ボタンの設置 </a></li>
+          <li ><a href="/plactice5.html">演習5.<br/>前日・翌日の表示、予約 </a></li>
+        </ul>
+      </nav>
+      <div class="span9">
+        <header class="page-header">
+          <h1>会議室予約状況</h1>
+        </header>
+        <div class="row">
+          <div class="span6">
+            <h2 class="date">yyyy-MM-dd</h2>
+          </div>
+          <div class="span3">
+            <ul id="date-field" class="pager">
+              <li class="button date-shift next" data-shifting="+1"><a href="#">next &gt;&gt;</a></li>
+              <li class="button date-shift next" data-shifting="-1"><a href="#">&lt;&lt; old</a></li>
+            </ul>
+          </div>
+        </div>
+        
+        <table class="reservations table table-striped table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th>部屋</th>
+              <th class="capacity">定員</th>
+              <th class="morning">午前</th>
+              <th class="daytime">午後</th>
+              <th class="night">夜間</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr id="seminar-room-a">
+              <td>セミナールームA</td>
+              <td class="capacity">150人</td>
+              <td data-division="morning">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="daytime">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="night">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+            </tr>
+            <tr id="seminar-room-b">
+              <td>セミナールームB</td>
+              <td class="capacity">40人</td>
+              <td data-division="morning">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="daytime">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="night">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+            </tr>
+            <tr id="seminar-room-c">
+              <td>セミナールームC</td>
+              <td class="capacity">30人</td>
+              <td data-division="morning">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="daytime">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="night">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+            </tr>
+            <tr id="practical-room">
+              <td>実習室</td>
+              <td class="capacity">-</td>
+              <td data-division="morning">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="daytime">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="night">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+            </tr>
+            <tr id="conference-room">
+              <td>会議室</td>
+              <td class="capacity">14人</td>
+              <td data-division="morning">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="daytime">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+              <td data-division="night">
+                <span class="status label">不明</span>
+                <span class="reserve button btn btn-mini">予約</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+        <div class="button reload btn btn-large btn-primary"><i class="icon-refresh icon-white"></i> 更新</div>
+      </div>
+    </div>
   </article>
 </body>
 </html>
