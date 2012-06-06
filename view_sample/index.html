@@ -21,10 +21,16 @@
     <header class="page-header">
       <h1>会議室予約状況</h1>
     </header>
-    <div id="date-field">
-      <div class="button date-shift left" data-shifting="-1">&lt;&lt;</div>
-      <div class="button date-shift right" data-shifting="+1">&gt;&gt;</div>
-      <h2 class="date">yyyy-MM-dd</h2>
+    <div class="row">
+      <div class="span10">
+        <h2 class="date">yyyy-MM-dd</h2>
+      </div>
+      <div class="span2">
+        <ul id="date-field" class="pager">
+          <li class="button date-shift next" data-shifting="+1"><a href="#">&gt;&gt;</a></li>
+          <li class="button date-shift next" data-shifting="-1"><a href="#">&lt;&lt;</a></li>
+        </ul>
+      </div>
     </div>
     
     <table class="reservations table table-striped table-bordered table-condensed">
