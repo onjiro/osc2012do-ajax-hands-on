@@ -56,7 +56,9 @@ function refresh(date) {
             var roomId = reservations[i].roomId;
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
-            $('#' + roomId + ' [data-division=' + division + '] .status').text(reserver);
+            $('#' + roomId + ' [data-division=' + division + '] .status')
+                .text(reserver)
+                .addClass('label-success');
         }
     });
 }
