@@ -145,39 +145,12 @@ $(function() {
         $(".status").text("空き");
         // reservations の情報を使用して予約状況テーブルを更新する
         $.each(reservations, function(i, reservation) {
-            fillReserver(reservation);
+            $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
         });
     });
 });
 
 function formatDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-}
-
-// 演習3. 空いている会議室の予約を行う
-$(function() {
-    // 予約ボタンにリスナーを登録
-    $(".reserve").bind("click", function(event) {
-        $this = $(this);
-        // prompt で入力ダイアログを開く
-        // キャンセルの場合 null、 見入力の場合空白
-        var reserver = prompt("予約名を入力してください");
-        if (!reserver || reserver === "") {
-            return;
-        }
-        var data = {
-            date: formatDate(new Date()),
-            roomId: $this.parent().parent().attr("id"),
-            division: $this.parent().data("division"),
-            reserver: reserver
-        }
-        $.post(RESERVATION_URL, data, function() {
-            fillReserver(data);
-        });
-    });
-});
-
-function fillReserver(reservation) {
-    $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
 }
 </script>
