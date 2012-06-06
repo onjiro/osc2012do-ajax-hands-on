@@ -157,7 +157,7 @@ function formatDate(date) {
 // 演習3. 空いている会議室の予約を行う
 $(function() {
     // 予約ボタンにリスナーを登録
-    $(".reserve").bind("click", function(event) {
+    $(".reserve:not(.disabled)").live("click", function(event) {
         $this = $(this);
         // prompt で入力ダイアログを開く
         // キャンセルの場合 null、 見入力の場合空白
@@ -178,6 +178,8 @@ $(function() {
 });
 
 function fillReserver(reservation) {
-    $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
+    $("#" + reservation.roomId + " [data-division=" + reservation.division + "]")
+        .children(".status").text(reservation.reserver).end()
+        .children(".reserve").addClass("disabled");
 }
 </script>
