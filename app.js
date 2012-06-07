@@ -30,6 +30,11 @@ var start = function(app, db, port) {
         });
     });
     
+    // 404 をログして url の typo をチェック可能に
+    app.get('*', function(req, res) {
+        console.log('404', req.url, req.query);
+        res.send(404);
+    });
     // テスト用に起動時に db を削除
     db.collection('reservations', function(err, collection) {
         if (err) {throw err;}
