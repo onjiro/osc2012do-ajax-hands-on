@@ -3,10 +3,10 @@ A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 $(function() {
     var currentDate = new Date();
     
-    // 予約ボタンの設置
-    $('.reservations .reserve:not(.disabled)')
-        .live('click', function(event) {
+    $('.reservations')
+        .find('.reserve:not(.disabled)').live('click', function(event) {
             $this = $(this);
+            // 予約ボタンの設置
             // prompt で入力ダイアログを開く
             // キャンセルの場合 null、未入力の場合空白
             // TODO 空白のトリミング
@@ -21,6 +21,15 @@ $(function() {
                 reserver: reserver
             }
             reserve(data.date, data.roomId, data.division, data.reserver);
+        }).end()
+        .find('.cancel:not(.disabled)').live('click', function(event) {
+            $this = $(this);
+            // 予約キャンセルボタンの設置
+            cancel({
+                date:     formatDate(currentDate),
+                roomId:   $this.parent().parent().attr('id'),
+                division: $this.parent().data('division')
+            });
         });
     
     // 更新ボタンの設置
@@ -57,8 +66,9 @@ function refresh(date) {
             var division = reservations[i].division;
             var reserver = reservations[i].reserver;
             $('#' + roomId + ' [data-division=' + division + ']')
-                .children('.status').text(reserver).addClass('label-success').end()
-                .children('.reserve').addClass('disabled');
+                .find('.status').text(reserver).addClass('label-success').end()
+                .find('.reserve').addClass('disabled').end()
+                .find('.cancel').css('visibility', 'visible');
         }
     });
 }
@@ -76,22 +86,21 @@ function reserve(date, roomId, division, reserver) {
         reserver: reserver
     }
     $.post('/reservations', data, function() {
-        $('#' + data.roomId + ' [data-division=' + data.division + '] .status').text(data.reserver);
+        $('#' + data.roomId + ' [data-division=' + data.division + ']')
+            .find('.status').text(data.reserver).end()
+            .find('.cancel').css('visibility', 'visible');
     });
 }
 
-function cancelReservation() {
-    // TODO 各部屋への対応
-    var data = {
-        date: '2012-04-01',
-        roomId: 'seminar-room-a',
-        division: 'morning'
-    }
+function cancel(data) {
     $.ajax('/reservations', {
         type: 'DELETE',
         data: data,
         success: function() {
-            $('#' + data.roomId + ' .' + data.division + ' dd').text('空き');
+            $('#' + data.roomId + ' [data-division=' + data.division + ']')
+                .find('.status').text('空き').removeClass('label-success').end()
+                .find('.reserve').removeClass('disabled').end()
+                .find('.cancel').css('visibility', 'hidden');
         }
     });
 }
