@@ -67,7 +67,7 @@ function refresh(date) {
             var reserver = reservations[i].reserver;
             $('#' + roomId + ' [data-division=' + division + ']')
                 .find('.status').text(reserver).addClass('label-success').end()
-                .find('.reserve').addClass('disabled').end()
+                .find('.reserve').hide().end()
                 .find('.cancel').css('visibility', 'visible');
         }
     });
@@ -87,7 +87,8 @@ function reserve(date, roomId, division, reserver) {
     }
     $.post('/reservations', data, function() {
         $('#' + data.roomId + ' [data-division=' + data.division + ']')
-            .find('.status').text(data.reserver).end()
+            .find('.status').text(data.reserver).addClass('label-success').end()
+            .find('.reserve').hide().end()
             .find('.cancel').css('visibility', 'visible');
     });
 }
@@ -99,7 +100,7 @@ function cancel(data) {
         success: function() {
             $('#' + data.roomId + ' [data-division=' + data.division + ']')
                 .find('.status').text('空き').removeClass('label-success').end()
-                .find('.reserve').removeClass('disabled').end()
+                .find('.reserve').show().end()
                 .find('.cancel').css('visibility', 'hidden');
         }
     });
