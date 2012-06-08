@@ -35,11 +35,6 @@ var start = function(app, db, port) {
         console.log('404', req.url, req.query);
         res.send(404);
     });
-    // テスト用に起動時に db を削除
-    db.collection('reservations', function(err, collection) {
-        if (err) {throw err;}
-        collection.drop();
-    });
     
     app.listen(port);
     console.log('server start at localhost:' + port);
