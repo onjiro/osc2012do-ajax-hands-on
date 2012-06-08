@@ -3,10 +3,10 @@ A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
 $(function() {
     var currentDate = new Date();
     
-    // 予約ボタンの設置
-    $('.reservations .reserve:not(.disabled)')
-        .live('click', function(event) {
+    $('.reservations')
+        .find('.reserve:not(.disabled)').live('click', function(event) {
             $this = $(this);
+            // 予約ボタンの設置
             // prompt で入力ダイアログを開く
             // キャンセルの場合 null、未入力の場合空白
             // TODO 空白のトリミング
