@@ -59,7 +59,10 @@ function refresh(date) {
     };
     $.getJSON(url, data, function(reservations) {
         // 取得できた場合予約状況欄を初期化
-        $('.reservations .status').text('空き');
+        $('.reservations')
+            .find('.status').removeClass('label-success').text('空き').end()
+            .find('.reserve').show().end()
+            .find('.cancel').css('visibility', 'hidden');
         // 予約状況欄に予約者名を記載
         for (var i = 0; i < reservations.length; i++) {
             var roomId = reservations[i].roomId;
