@@ -8,12 +8,12 @@ http://osc2012do-ajax-hands-on.herokuapp.com/
 
 ## 演習課題サンプル
 
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice0.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice1.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice2.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice3.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice4.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/plactice5.html （未作成）
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice0.html
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice1.html
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice2.html
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice3.html
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice4.html
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice5.html （未作成）
 
 ## API
 
