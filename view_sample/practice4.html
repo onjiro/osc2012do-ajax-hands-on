@@ -177,7 +177,7 @@ var initialize = function() {
 
     // 演習3. 空いている会議室の予約を行う
     // 予約ボタンにリスナーを登録
-    $(".reserve:not(.disabled)").live("click", function(event) {
+    var onClickReserve = function() {
         $this = $(this);
         // prompt で入力ダイアログを開く
         // キャンセルの場合 null、 見入力の場合空白
@@ -197,7 +197,8 @@ var initialize = function() {
                 .children(".reserve").addClass("disabled");
         };
         $.post(RESERVATION_URL, data, callbackOnPost);
-    });
+    };
+    $(".reserve:not(.disabled)").live('click', onClickReserve);
     
     // 演習4. 更新ボタンの設置
     // ボタン押下時にリクエストを飛ばして、成功時のコールバックで画面を更新する
