@@ -143,8 +143,8 @@
 // 通常は js は別ファイルに記載するが、今回は見やすさを考慮して HTML ファイル中に記載している。
 
 // 演習1. 今日の日付を表示する
-// $() に登録した関数は DOM の操作が可能になった時点で実行される
-$(function() {
+// $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
+$(document).ready(function() {
     // 現在の日付を表す文字列を生成
     var currentDate = new Date();
     var dateString = formatDate(currentDate);
@@ -154,7 +154,7 @@ $(function() {
 
 // 演習2. 会議室の利用状況を取得し、テーブルに反映する
 RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
-$(function() {
+$(document).ready(function() {
     // リクエスト時に付加するデータ
     data = {
         date: formatDate(new Date())
@@ -183,7 +183,7 @@ function formatDate(date) {
 }
 
 // 演習3. 空いている会議室の予約を行う
-$(function() {
+$(document).ready(function() {
     // 予約ボタンにリスナーを登録
     $(".reserve:not(.disabled)").live("click", function(event) {
         $this = $(this);
