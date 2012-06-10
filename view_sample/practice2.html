@@ -142,25 +142,21 @@
 <script>
 // 通常は js は別ファイルに記載するが、今回は見やすさを考慮して HTML ファイル中に記載している。
 
-// 演習1. 今日の日付を表示する
-// $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
-$(document).ready(function() {
+var initialize = function() {
+    // 演習1. 今日の日付を表示する
     // 現在の日付を表す文字列を生成
     var currentDate = new Date();
     var dateString = formatDate(currentDate);
     // date クラスを持つ element のテキストを現在の日付に書き換え
     $(".date").text(dateString);
-});
-
-// 演習2. 会議室の利用状況を取得し、テーブルに反映する
-RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
-$(document).ready(function() {
+    
+    // 演習2. 会議室の利用状況を取得し、テーブルに反映する
+    RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
     // リクエスト時に付加するデータ
     data = {
         date: formatDate(new Date())
     };
-    // API にリクエスト送ってJSON 形式でデータを取得する
-    $.getJSON(RESERVATION_URL, data, function(reservations) {
+    var callbackOnGet = function(reservations) {
         // レスポンス時にコールバックとして実行される関数
         // reservations は次のような形式の配列で返ってくる
         // [
@@ -175,10 +171,15 @@ $(document).ready(function() {
         $.each(reservations, function(i, reservation) {
             $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
         });
-    });
-});
+    };
+    // API にリクエスト送ってJSON 形式でデータを取得する
+    $.getJSON(RESERVATION_URL, data, callbackOnGet);
+};
 
 function formatDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-}
+};
+
+// $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
+$(document).ready(initialize);
 </script>

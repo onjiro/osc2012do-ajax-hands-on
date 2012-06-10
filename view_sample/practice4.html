@@ -141,53 +141,41 @@
 </html>
 <script>
 // 通常は js は別ファイルに記載するが、今回は見やすさを考慮して HTML ファイル中に記載している。
-var currentDate = new Date();
 
-// 演習1. 今日の日付を表示する
-// $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
-$(document).ready(function() {
+var initialize = function() {
+    // 演習1. 今日の日付を表示する
     // 現在の日付を表す文字列を生成
+    var currentDate = new Date();
     var dateString = formatDate(currentDate);
     // date クラスを持つ element のテキストを現在の日付に書き換え
     $(".date").text(dateString);
-});
-
-// 演習2. 会議室の利用状況を取得し、テーブルに反映する
-RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
-$(document).ready(function() {
+    
+    // 演習2. 会議室の利用状況を取得し、テーブルに反映する
+    RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
     // リクエスト時に付加するデータ
     data = {
-        date: formatDate(currentDate)
+        date: formatDate(new Date())
     };
-    // API にリクエスト送ってJSON 形式でデータを取得する
-    $.getJSON(RESERVATION_URL, data, function(reservations) {
+    var callbackOnGet = function(reservations) {
         // レスポンス時にコールバックとして実行される関数
-        fillAll(reservations);
-    });
-});
+        // reservations は次のような形式の配列で返ってくる
+        // [
+        //   { date:"2012-6-16", roomId:"seminar-room-a", division:"morning", reserver:"権兵衛" },
+        //   { date:"2012-6-16", roomId:"seminar-room-a", division:"night", reserver:"権兵衛" },
+        //   ・・・
+        // ]
+        
+        // 予約がない場合は reservations にデータが入っていないため、事前に全ての予約状況を"空き"に変更する
+        $(".status").text("空き");
+        // reservations の情報を使用して予約状況テーブルを更新する
+        $.each(reservations, function(i, reservation) {
+            $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
+        });
+    }
+    // API にリクエスト送ってJSON 形式でデータを取得する
+    $.getJSON(RESERVATION_URL, data, callbackOnGet);
 
-function formatDate(date) {
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-}
-
-function fillAll(reservations) {
-    // reservations は次のような形式の配列で返ってくる
-    // [
-    //   { date:"2012-6-16", roomId:"seminar-room-a", division:"morning", reserver:"権兵衛" },
-    //   { date:"2012-6-16", roomId:"seminar-room-a", division:"night", reserver:"権兵衛" },
-    //   ・・・
-    // ]
-    
-    // 予約がない場合は reservations にデータが入っていないため、事前に全ての予約状況を"空き"に変更する
-    $(".status").text("空き");
-    // reservations の情報を使用して予約状況テーブルを更新する
-    $.each(reservations, function(i, reservation) {
-        fillReserver(reservation);
-    });
-}
-
-// 演習3. 空いている会議室の予約を行う
-$(document).ready(function() {
+    // 演習3. 空いている会議室の予約を行う
     // 予約ボタンにリスナーを登録
     $(".reserve:not(.disabled)").live("click", function(event) {
         $this = $(this);
@@ -198,7 +186,7 @@ $(document).ready(function() {
             return;
         }
         var data = {
-            date: formatDate(currentDate),
+            date: formatDate(new Date()),
             roomId: $this.parent().parent().attr("id"),
             division: $this.parent().data("division"),
             reserver: reserver
@@ -207,7 +195,21 @@ $(document).ready(function() {
             fillReserver(data);
         });
     });
-});
+    
+    // 演習4. 更新ボタンの設置
+    // ボタン押下時にリクエストを飛ばして、成功時のコールバックで画面を更新する
+    // 画面の更新ロジックは演習2のものと同じ
+    $(".reload").bind("click", function(event) {
+        var data = {
+            date: formatDate(currentDate)
+        };
+        $.get(RESERVATION_URL, data, callbackOnGet);
+    });
+};
+
+function formatDate(date) {
+    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+};
 
 function fillReserver(reservation) {
     $("#" + reservation.roomId + " [data-division=" + reservation.division + "]")
@@ -215,17 +217,6 @@ function fillReserver(reservation) {
         .children(".reserve").addClass("disabled");
 }
 
-// 演習4. 更新ボタンの設置
-$(document).ready(function() {
-    // ボタン押下時にリクエストを飛ばして、成功時のコールバックで画面を更新する
-    // 画面の更新ロジックは演習2のものと同じ
-    $(".reload").bind("click", function(event) {
-        var data = {
-            date: formatDate(currentDate)
-        };
-        $.get(RESERVATION_URL, data, function(reservations) {
-            fillAll(reservations);
-        });
-    });
-});
+// $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
+$(document).ready(initialize);
 </script>
