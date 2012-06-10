@@ -191,21 +191,18 @@ var initialize = function() {
             division: $this.parent().data("division"),
             reserver: reserver
         }
-        $.post(RESERVATION_URL, data, function() {
-            fillReserver(data);
-        });
+        var callbackOnPost = function () {
+            $("#" + data.roomId + " [data-division=" + data.division + "]")
+                .children(".status").text(data.reserver).end()
+                .children(".reserve").addClass("disabled");
+        }
+        $.post(RESERVATION_URL, data, callbackOnPost);
     });
 };
 
 function formatDate(date) {
     return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 };
-
-function fillReserver(reservation) {
-    $("#" + reservation.roomId + " [data-division=" + reservation.division + "]")
-        .children(".status").text(reservation.reserver).end()
-        .children(".reserve").addClass("disabled");
-}
 
 // $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
 $(document).ready(initialize);
