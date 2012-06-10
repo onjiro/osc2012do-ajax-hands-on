@@ -203,12 +203,13 @@ var initialize = function() {
     // 演習4. 更新ボタンの設置
     // ボタン押下時にリクエストを飛ばして、成功時のコールバックで画面を更新する
     // 画面の更新ロジックは演習2のものと同じ
-    $(".reload").bind("click", function(event) {
+    var onClickReload = function(event) {
         var data = {
             date: formatDate(currentDate)
         };
         $.get(RESERVATION_URL, data, callbackOnGet);
-    });
+    };
+    $(".reload").bind("click", onClickReload);
 };
 
 function formatDate(date) {
