@@ -140,20 +140,22 @@
 </body>
 </html>
 <script>
-    // Date オブジェクトを "yyyy-M-d" 形式にフォーマッする関数
-    var formatDate = function(date) {
-        var strDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
-        return strDate;
-    };
+// 通常は js は別ファイルに記載するが、今回は見やすさを考慮して HTML ファイル中に記載
 
-    // ドキュメントの準備が完了した時点で実行される関数
-    var initialize = function() {
-        // 現在の日付を表す文字列を生成
-        var currentDate = new Date();
-        // .date に合致する要素のテキストを現在の日付に書き換え
-        $(".date").text(formatDate(currentDate));
-    };
+// Date オブジェクトを "yyyy-M-d" 形式にフォーマッする関数
+var formatDate = function(date) {
+    var strDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    return strDate;
+};
 
-    // ドキュメントの操作が可能になった時点で initialize が実行される
-    $(document).ready(initialize);
+// ドキュメントの準備が完了した時点で実行される関数
+var initialize = function() {
+    // 現在の日付を表す文字列を生成
+    var currentDate = new Date();
+    // .date に合致する要素のテキストを現在の日付に書き換え
+    $(".date").text(formatDate(currentDate));
+};
+
+// ドキュメントの操作が可能になった時点で initialize が実行される
+$(document).ready(initialize);
 </script>
