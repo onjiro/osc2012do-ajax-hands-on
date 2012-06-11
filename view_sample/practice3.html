@@ -200,7 +200,7 @@ var initialize = function() {
         }
         $.post(RESERVATION_URL, data, callbackOnPost);
     };
-    $(".reserve").live('click', onClickReserve);
+    $(".reserve").bind('click', onClickReserve);
     // ===============================================================
 };
 
