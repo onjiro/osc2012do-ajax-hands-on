@@ -197,11 +197,10 @@ var initialize = function() {
         }
         var callbackOnPost = function () {
             $("#" + data.roomId + " [data-division=" + data.division + "] .status").text(data.reserver);
-            $("#" + data.roomId + " [data-division=" + data.division + "] .reserve").addClass("disabled");
         }
         $.post(RESERVATION_URL, data, callbackOnPost);
     };
-    $(".reserve:not(.disabled)").live('click', onClickReserve);
+    $(".reserve").live('click', onClickReserve);
     // ===============================================================
 };
 
