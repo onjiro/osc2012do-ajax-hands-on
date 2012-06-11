@@ -163,24 +163,21 @@ var initialize = function() {
     const RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
     // リクエスト時に付加するデータ
     var data = {
-        date: formatDate(currentDate())
+        date: formatDate(currentDate)
     };
     // GET が成功した場合に実行されるコールバック関数
     var callbackOnGet = function(reservations) {
         // 予約がない場合は reservations にデータが入っていないため、事前に全ての予約状況を"空き"に変更する
         $(".status").text("空き");
         // reservations の情報を使用して予約状況テーブルを更新する
-        $.each(reservations, function(i, reservation) {
-            $("#" + reservation.roomId + " [data-division=" + reservation.division + "] .status").text(reservation.reserver);
-        });
+        for (var i = 0; i < reservations.length; i++) {
+            var one = reservations[i];
+            $("#" + one.roomId + " [data-division=" + one.division + "] .status").text(one.reserver);
+        };
     };
     // API にリクエスト送ってJSON 形式でデータを取得する
     $.get(RESERVATION_URL, data, callbackOnGet);
     // ===============================================================
-};
-
-function formatDate(date) {
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
 };
 
 // ドキュメントの操作が可能になった時点で initialize が実行される
