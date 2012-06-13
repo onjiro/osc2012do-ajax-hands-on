@@ -182,7 +182,6 @@ var initialize = function() {
     // = 演習3. 空いている会議室の予約を行う =========================
     // 予約ボタンにリスナーを登録
     var onClickReserve = function(event) {
-        $this = $(this);
         // prompt で入力ダイアログを開く
         // キャンセルの場合 null、 見入力の場合空白
         var reserver = prompt("予約名を入力してください");
@@ -190,14 +189,14 @@ var initialize = function() {
             return;
         }
         var data = {
-            date: formatDate(new Date()),
-            roomId: $this.parent().parent().attr("id"),
-            division: $this.parent().data("division"),
+            date: formatDate(currentDate),
+            roomId: $(this).parent().parent().attr("id"),
+            division: $(this).parent().data("division"),
             reserver: reserver
-        }
+        };
         var callbackOnPost = function () {
             $("#" + data.roomId + " [data-division=" + data.division + "] .status").text(data.reserver);
-        }
+        };
         $.post(RESERVATION_URL, data, callbackOnPost);
     };
     $(".reserve").bind('click', onClickReserve);
