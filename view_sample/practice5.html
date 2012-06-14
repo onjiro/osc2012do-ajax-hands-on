@@ -33,8 +33,8 @@
       </div>
       <div class="span3">
         <ul id="date-field" class="pager">
-          <li class="js-to-next-day next" ><a href="#">next &gt;&gt;</a></li>
-          <li class="js-to-previous-day next" ><a href="#">&lt;&lt; prev</a></li>
+          <li class="next" ><a href="#" class="to-next-day">next &gt;&gt;</a></li>
+          <li class="next" ><a href="#" class="to-prev-day">&lt;&lt; prev</a></li>
         </ul>
       </div>
     </div>
@@ -229,8 +229,8 @@ var initialize = function() {
     // 各ボタンにクリック時の動作を指定
     // javascript では引数として無名関数を渡すことも可能
     // ここでは shiftDate を呼び出す関数を引数として指定している
-    $(".js-to-next-day").bind("click", function() { shiftDate(1); });
-    $(".js-to-previous-day").bind("click", function() { shiftDate(-1); });
+    $(".to-next-day").bind("click", function() { shiftDate(1); });
+    $(".to-prev-day").bind("click", function() { shiftDate(-1); });
     // ===============================================================
 };
 
