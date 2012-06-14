@@ -50,7 +50,7 @@
         <th class="night">夜間</th>
       </tr>
       <!-- 予約状況 - 各行の id が部屋の識別子です -->
-      <tr id="seminar-room-a">
+      <tr id="seminar-room-a" data-room-id="seminar-room-a">
         <td>セミナールームA</td>
         <td class="capacity">150人</td>
         <td data-division="morning" class="morning">
@@ -66,7 +66,7 @@
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="seminar-room-b">
+      <tr id="seminar-room-b" data-room-id="seminar-room-b">
         <td>セミナールームB</td>
         <td class="capacity">40人</td>
         <td data-division="morning" class="morning">
@@ -82,7 +82,7 @@
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="seminar-room-c">
+      <tr id="seminar-room-c" data-room-id="seminar-room-c">
         <td>セミナールームC</td>
         <td class="capacity">30人</td>
         <td data-division="morning" class="morning">
@@ -98,7 +98,7 @@
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="practical-room">
+      <tr id="practical-room" data-room-id="practical-room">
         <td>実習室</td>
         <td class="capacity">-</td>
         <td data-division="morning" class="morning">
@@ -114,7 +114,7 @@
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="conference-room">
+      <tr id="conference-room" data-room-id="conference-room">
         <td>会議室</td>
         <td class="capacity">14人</td>
         <td data-division="morning" class="morning">
@@ -187,7 +187,7 @@ var initialize = function() {
         }
         var data = {
             date: formatDate(new Date()),
-            roomId: $this.parent().parent().attr("id"),
+            roomId: $this.parents("[data-room-id]").data("room-id"),
             division: $this.parents("[data-division]").data("division"),
             reserver: reserver
         }
