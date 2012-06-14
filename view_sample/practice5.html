@@ -33,8 +33,8 @@
       </div>
       <div class="span3">
         <ul id="date-field" class="pager">
-          <li class="js-to-next-day next" ><a href="#">next &gt;&gt;</a></li>
-          <li class="js-to-previous-day next" ><a href="#">&lt;&lt; prev</a></li>
+          <li class="next" ><a href="#" class="to-next-day">next &gt;&gt;</a></li>
+          <li class="next" ><a href="#" class="to-prev-day">&lt;&lt; prev</a></li>
         </ul>
       </div>
     </div>
@@ -142,43 +142,46 @@
 <script>
 // 通常は js は別ファイルに記載するが、今回は見やすさを考慮して HTML ファイル中に記載している。
 
+// Date オブジェクトを "yyyy-M-d" 形式にフォーマッする関数
+var formatDate = function(date) {
+    var strDate = date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    return strDate;
+};
+
+// ドキュメントの準備が完了した時点で実行される関数
 var initialize = function() {
-    // 演習1. 今日の日付を表示する
-    // 現在の日付を表す文字列を生成
+    // 現在の日付を保持するオブジェクト
     var currentDate = new Date();
-    var dateString = formatDate(currentDate);
-    // date クラスを持つ element のテキストを現在の日付に書き換え
-    $(".date").text(dateString);
     
-    // 演習2. 会議室の利用状況を取得し、テーブルに反映する
-    RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
+    // = 演習1. 今日の日付を表示する =================================
+    // .date に合致する要素のテキストを現在の日付に書き換え
+    $(".date").text(formatDate(currentDate));
+    // ===============================================================
+    
+    // = 演習2. 会議室の利用状況を取得し、テーブルに反映する =========
+    // 予約状況 API の URL
+    const RESERVATION_URL = "http://osc2012do-ajax-hands-on.herokuapp.com/reservations";
     // リクエスト時に付加するデータ
-    data = {
-        date: formatDate(new Date())
+    var data = {
+        date: formatDate(currentDate)
     };
+    // GET が成功した場合に実行されるコールバック関数
     var callbackOnGet = function(reservations) {
-        // レスポンス時にコールバックとして実行される関数
-        // reservations は次のような形式の配列で返ってくる
-        // [
-        //   { date:"2012-6-16", roomId:"seminar-room-a", division:"morning", reserver:"権兵衛" },
-        //   { date:"2012-6-16", roomId:"seminar-room-a", division:"night", reserver:"権兵衛" },
-        //   ・・・
-        // ]
-        
         // 予約がない場合は reservations にデータが入っていないため、事前に全ての予約状況を"空き"に変更する
         $(".status").text("空き");
         // reservations の情報を使用して予約状況テーブルを更新する
-        $.each(reservations, function(i, reservation) {
-            $("#" + reservation.roomId + " ." + reservation.division + " .status").text(reservation.reserver);
-        });
-    }
+        for (var i = 0; i < reservations.length; i++) {
+            var one = reservations[i];
+            $("#" + one.roomId + " ." + one.division + " .status").text(one.reserver);
+        };
+    };
     // API にリクエスト送ってJSON 形式でデータを取得する
-    $.getJSON(RESERVATION_URL, data, callbackOnGet);
+    $.get(RESERVATION_URL, data, callbackOnGet);
+    // ===============================================================
 
-    // 演習3. 空いている会議室の予約を行う
+    // = 演習3. 空いている会議室の予約を行う =========================
     // 予約ボタンにリスナーを登録
     var onClickReserve = function(event) {
-        $this = $(this);
         // prompt で入力ダイアログを開く
         // キャンセルの場合 null、 見入力の場合空白
         var reserver = prompt("予約名を入力してください");
@@ -186,22 +189,22 @@ var initialize = function() {
             return;
         }
         var data = {
-            date: formatDate(new Date()),
-            roomId: $this.parents("[data-room-id]").data("room-id"),
-            division: $this.parents("[data-division]").data("division"),
+            date: formatDate(currentDate),
+            roomId: $(this).parents("[data-room-id]").data("room-id"),
+            division: $(this).parents("[data-division]").data("division"),
             reserver: reserver
-        }
-        var callbackOnPost = function() {
+        };
+        var callbackOnPost = function () {
             $("#" + data.roomId + " ." + data.division + " .status").text(data.reserver);
-            $("#" + data.roomId + " ." + data.division + " .reserve").addClass("disabled");
         };
         $.post(RESERVATION_URL, data, callbackOnPost);
     };
-    $(".reserve:not(.disabled)").live('click', onClickReserve);
-    
-    // 演習4. 更新ボタンの設置
-    // ボタン押下時にリクエストを飛ばして、成功時のコールバックで画面を更新する
-    // 画面の更新ロジックは演習2のものと同じ
+    $(".reserve").bind('click', onClickReserve);
+    // ===============================================================
+
+    // = 演習4. 更新ボタンの設置 =====================================
+    // ボタンクリックにGETリクエストを送る
+    // コールバックで返ってくる情報を使用して演習2と同様の方法で画面を更新する
     var onClickReload = function(event) {
         var data = {
             date: formatDate(currentDate)
@@ -209,32 +212,26 @@ var initialize = function() {
         $.get(RESERVATION_URL, data, callbackOnGet);
     };
     $(".reload").bind("click", onClickReload);
-    
-    // 演習5. 前後の日付への移動ボタン
-    // 1 日分のミリ秒値
-    var A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
-    
-    // next ボタン押下時に定義済みの currentDate を変更して予約状況を取得
-    var clickOnToNextDay = function(event) {
-        currentDate.setTime(currentDate.getTime() + A_DAY_IN_MILLISECONDS);
-        data.date = formatDate(currentDate);
-        $(".date").text(formatDate(currentDate));
-        $.getJSON(RESERVATION_URL, data, callbackOnGet);
-    };
-    $(".js-to-next-day").bind("click", clickOnToNextDay);
-    
-    // old ボタン押下時に定義済みの currentDate を変更して予約状況を取得
-    var clickOnToPreviousDay = function(event) {
-        currentDate.setTime(currentDate.getTime() - A_DAY_IN_MILLISECONDS);
-        data.date = formatDate(currentDate);
-        $(".date").text(formatDate(currentDate));
-        $.getJSON(RESERVATION_URL, data, callbackOnGet);
-    };
-    $(".js-to-previous-day").bind("click", clickOnToPreviousDay);
-};
+    // ===============================================================
 
-function formatDate(date) {
-    return date.getFullYear() + "-" + (date.getMonth() + 1) + "-" + date.getDate();
+    // = 演習5. 前後の日付への移動ボタン =============================
+    // 現在の日付から指定した日付分移動した日付に変更する関数
+    var A_DAY_IN_MILLISECONDS = 24 * 60 * 60 * 1000;
+    var shiftDate = function(shiftInDays) {
+        currentDate.setTime(currentDate.getTime() + shiftInDays * A_DAY_IN_MILLISECONDS);
+        var data = {
+            date: formatDate(currentDate)
+        };
+        $(".date").text(formatDate(currentDate));
+        $.getJSON(RESERVATION_URL, data, callbackOnGet);
+    };
+    
+    // 各ボタンにクリック時の動作を指定
+    // javascript では引数として無名関数を渡すことも可能
+    // ここでは shiftDate を呼び出す関数を引数として指定している
+    $(".to-next-day").bind("click", function() { shiftDate(1); });
+    $(".to-prev-day").bind("click", function() { shiftDate(-1); });
+    // ===============================================================
 };
 
 // $(document).ready() に登録した関数はドキュメントの操作が可能になった時点で実行される
