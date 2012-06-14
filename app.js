@@ -19,14 +19,14 @@ var start = function(app, db, port) {
         console.log(new Date(), reservationUrl, 'post', req.body);
         new Reservation(req.body).save(db, function(err, item) {
             res.header('Access-Control-Allow-Origin', '*');
-            res.send();
+            res.send(item);
         });
     });
     app.del(reservationUrl, function(req, res){
         console.log(new Date(), reservationUrl, 'del', req.body);
         Reservation.remove(db, req.body, function(err, item) {
             res.header('Access-Control-Allow-Origin', '*');
-            res.send();
+            res.send(item);
         });
     });
     
