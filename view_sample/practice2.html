@@ -50,82 +50,82 @@
         <th class="night">夜間</th>
       </tr>
       <!-- 予約状況 - 各行の id が部屋の識別子です -->
-      <tr id="seminar-room-a">
+      <tr id="seminar-room-a" data-room-id="seminar-room-a">
         <td>セミナールームA</td>
         <td class="capacity">150人</td>
-        <td data-division="morning">
+        <td data-division="morning" class="morning">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="daytime">
+        <td data-division="daytime" class="daytime">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="night">
+        <td data-division="night" class="night">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="seminar-room-b">
+      <tr id="seminar-room-b" data-room-id="seminar-room-b">
         <td>セミナールームB</td>
         <td class="capacity">40人</td>
-        <td data-division="morning">
+        <td data-division="morning" class="morning">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="daytime">
+        <td data-division="daytime" class="daytime">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="night">
+        <td data-division="night" class="night">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="seminar-room-c">
+      <tr id="seminar-room-c" data-room-id="seminar-room-c">
         <td>セミナールームC</td>
         <td class="capacity">30人</td>
-        <td data-division="morning">
+        <td data-division="morning" class="morning">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="daytime">
+        <td data-division="daytime" class="daytime">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="night">
+        <td data-division="night" class="night">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="practical-room">
+      <tr id="practical-room" data-room-id="practical-room">
         <td>実習室</td>
         <td class="capacity">-</td>
-        <td data-division="morning">
+        <td data-division="morning" class="morning">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="daytime">
+        <td data-division="daytime" class="daytime">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="night">
+        <td data-division="night" class="night">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
       </tr>
-      <tr id="conference-room">
+      <tr id="conference-room" data-room-id="conference-room">
         <td>会議室</td>
         <td class="capacity">14人</td>
-        <td data-division="morning">
+        <td data-division="morning" class="morning">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="daytime">
+        <td data-division="daytime" class="daytime">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
-        <td data-division="night">
+        <td data-division="night" class="night">
           <span class="status label">不明</span>
           <span class="reserve btn btn-mini">予約</span>
         </td>
@@ -172,7 +172,7 @@ var initialize = function() {
         // reservations の情報を使用して予約状況テーブルを更新する
         for (var i = 0; i < reservations.length; i++) {
             var one = reservations[i];
-            $("#" + one.roomId + " [data-division=" + one.division + "] .status").text(one.reserver);
+            $("#" + one.roomId + " ." + one.division + " .status").text(one.reserver);
         };
     };
     // API にリクエスト送ってJSON 形式でデータを取得する
