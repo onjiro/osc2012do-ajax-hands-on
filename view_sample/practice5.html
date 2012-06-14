@@ -188,7 +188,7 @@ var initialize = function() {
         var data = {
             date: formatDate(new Date()),
             roomId: $this.parent().parent().attr("id"),
-            division: $this.parent().data("division"),
+            division: $this.parents("[data-division]").data("division"),
             reserver: reserver
         }
         var callbackOnPost = function() {
