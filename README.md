@@ -13,8 +13,15 @@ http://osc2012do-ajax-hands-on.herokuapp.com/
 * https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice2.html
 * https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice3.html
 * https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice4.html
-* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice5.html （未作成）
+* https://github.com/onjiro/osc2012do-ajax-hands-on/blob/master/view_sample/practice5.html
 
 ## API
 
-TODO
+### 予約状況
+
+* URL
+  * ${root}/reservations
+
+* 操作
+  * GET: 予約状況取得、query で検索条件を指定
+  * POST: 予約実行、予約情報をdataとして指定
